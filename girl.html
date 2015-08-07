@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>girl</title>
+	<style type="text/css">
+	body {
+    margin: 0;
+    background: black;
+}
+
+#canvas {
+    position: absolute;
+    margin: auto;
+    width: 400px;
+    height: 540px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}</style>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+<img id="image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/image.jpg" style="display: none;"/>
+<script type="text/javascript">
+	// canvas settings
+var mViewWidth = 0,
+    mViewHeight = 0,
+    mCanvas = document.getElementById("canvas"),
+    mCtx;
+
+var mImage = document.getElementById('image'),
+    mVideo = document.createElement('video');
+
+mVideo.autoplay = true;
+mVideo.loop = true;
+mVideo.src = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/smoke.mp4';
+mVideo.load();
+mVideo.addEventListener('loadeddata', function() {
+    initCanvas();
+    requestAnimationFrame(loop);
+});
+
+function initCanvas() {
+    mViewWidth = mCanvas.width = mCanvas.clientWidth;
+    mViewHeight = mCanvas.height = mCanvas.clientHeight;
+    mCtx = mCanvas.getContext('2d');
+}
+
+/////////////////////////////
+// LOOP
+/////////////////////////////
+
+function draw() {
+    // prevent flicker
+    if (mVideo.currentTime >= 0.01) {
+
+        mCtx.clearRect(0, 0, mViewWidth, mViewHeight);
+
+        mCtx.globalCompositeOperation = 'source-over';
+        mCtx.drawImage(mImage, 40, 0, mViewWidth, mViewHeight);
+
+        mCtx.globalCompositeOperation = 'hard-light';
+        mCtx.drawImage(mVideo, 0, 0);
+    }
+}
+
+function loop() {
+    draw();
+    requestAnimationFrame(loop);
+}
+
+</script>
+</body>
+</html>
