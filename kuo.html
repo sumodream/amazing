@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>kuo</title>
+	<style type="text/css">
+		body {
+  background: #DE7268;
+}
+
+div,
+div:before,
+div:after {
+  width: 10px;
+  height: 100px;
+  background: white;
+  border: 3px solid black;
+  box-sizing: border-box;
+}
+
+div {
+  margin: 400px auto;
+  position: relative;
+  animation: splurt 1s infinite, spin 10s infinite linear reverse;
+}
+
+div:before,
+div:after {
+  content: '';
+  position: absolute;
+  animation: splurt 1s infinite, spin 5s infinite linear;
+}
+
+div:after {
+  animation: splurt 1s infinite, spin 5s infinite linear reverse;
+}
+
+@keyframes splurt {
+  from {
+    box-shadow: 0 0 0 0 rgba(255,255,255, 1), 0 0 0 0 rgba(255,255,255, 1), 0 0 0 0 rgba(255,255,255, 0.5), 0 0 0 0 rgba(255,255,255, 1);
+  }
+  to {
+    box-shadow: 50px 0 16px 2px rgba(0, 0, 0, 0), 100px 0 16px 4px rgba(0, 0, 0, 0), 200px 0 16px 16px rgba(0, 0, 0, 0), 400px 0 16px 32px rgba(0, 0, 0, 0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+	</style>
+</head>
+<body>
+	<div></div>
+</body>
+</html>
